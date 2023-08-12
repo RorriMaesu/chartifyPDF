@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Analyzer</title>
+    <script src="/static/jquery-3.7.0.min.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<div class="container">
+    <img src="/static/logo.png" alt="Logo" class="logo">
+    <h2>PDF Analyzer</h2>
+
+    <input type="file" id="pdfInput" style="display: none;">
+
+    <div class="button-container">
+        <button id="uploadBtn"></button>
+        <button id="exportBtn" onclick="exportData()"></button>
+        <button id="instructionsBtn" onclick="showInstructions()"></button> <!-- Instructions button -->
+    </div>
+
+    <div class="results">
+        <h3>Analysis Results</h3>
+        <p><strong>Score:</strong> <span id="score"></span></p>
+        <p><strong>Text Extract (First 1000 chars):</strong></p>
+        <pre id="textExtract"></pre>
+
+        <h3>Visualization of Text Length by Page</h3>
+        <div id="plot"></div>
+    </div>
+</div>
+
+<div class="instructions-modal" id="instructionsModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInstructions()">&times;</span>
+        <h3>Instructions</h3>
+        <ul>
+            <li>Step 1: Click the "Choose File" button to upload a PDF document.</li>
+            <li>Step 2: The analysis results will be displayed below, including the text score and text extract.</li>
+            <li>Step 3: Click the "Export" button to download the analysis results as a CSV file.</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

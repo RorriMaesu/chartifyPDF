@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 150px;
+    height: 64px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#uploadBtn {
+    background-image: url('/static/choose_file.png');
+}
+
+#exportBtn {
+    background-image: url('/static/export.png');
+}
+
+#instructionsBtn {
+    background-image: url('/static/instructions.png');
+}
+
+.results {
+    margin-top: 20px;
+}
+
+.graph {
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+    display: block;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.button-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Modal styles */
+#instructionsModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 20% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
