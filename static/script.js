@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    preloadSpinnerImages();
+
     $("#uploadBtn").click(function () {
         $("#pdfInput").trigger('click');
     });
@@ -9,9 +11,29 @@ $(document).ready(function () {
     });
 });
 
+function preloadSpinnerImages() {
+    const spinnerImages = [
+        "/static/spinner_1.png",
+        "/static/spinner_2.png",
+        "/static/spinner_3.png",
+        "/static/spinner_4.png",
+        "/static/spinner_5.png",
+        "/static/spinner_6.png",
+        "/static/spinner_7.png",
+        "/static/spinner_8.png"
+    ];
+
+    spinnerImages.forEach(function(imagePath) {
+        new Image().src = imagePath;
+    });
+}
+
 function analyzePDF(file) {
     const formData = new FormData();
     formData.append("file", file);
+
+    // Show the loading spinner animation
+    showLoadingSpinner();
 
     $.ajax({
         type: "POST",
@@ -25,6 +47,11 @@ function analyzePDF(file) {
 
             // Visualize the text length by page
             visualizeData(response.pages_text_length);
+
+            // Hide the loading spinner 1 second after the file is fully loaded
+            setTimeout(function() {
+                hideLoadingSpinner();
+            }, 1000);
         },
         error: function (error) {
             console.error("Error during the analysis:", error);
@@ -66,10 +93,7 @@ function exportData() {
         contentType: "application/json",
         data: JSON.stringify({score: score, total_text: text}),
         success: function (response, status, xhr) {
-            // Try to determine the filename from the content disposition header
             let filename = getFilenameFromHeader(xhr.getResponseHeader('Content-Disposition'));
-
-            // If we couldn't figure out the filename, default to 'analysis.csv'
             if (!filename) {
                 filename = 'analysis.csv';
             }
@@ -99,12 +123,49 @@ function getFilenameFromHeader(header) {
     return null;
 }
 
-// Show instructions modal
 function showInstructions() {
     $("#instructionsModal").css("display", "block");
 }
 
-// Close instructions modal
 function closeInstructions() {
     $("#instructionsModal").css("display", "none");
+}
+
+function showLoadingSpinner() {
+    $(".loading-container").show();
+
+    const spinnerImages = [
+        "/static/spinner_1.png",
+        "/static/spinner_2.png",
+        "/static/spinner_3.png",
+        "/static/spinner_4.png",
+        "/static/spinner_5.png",
+        "/static/spinner_6.png",
+        "/static/spinner_7.png",
+        "/static/spinner_8.png"
+    ];
+    
+    let currentImageIndex = 0;
+    const spinnerImage = document.querySelector("#loading-spinner");
+    spinnerImage.src = spinnerImages[0]; // Set the initial image
+
+    function changeSpinnerImage() {
+        currentImageIndex = (currentImageIndex + 1) % spinnerImages.length;
+        spinnerImage.src = spinnerImages[currentImageIndex];
+    }
+
+    const duration = 45;
+    const intervalId = setInterval(changeSpinnerImage, duration);
+
+    // Store the interval ID on the spinner element so it can be cleared later
+    spinnerImage.dataset.intervalId = intervalId;
+}
+
+function hideLoadingSpinner() {
+    // Clear the image cycling interval
+    const spinnerImage = document.querySelector("#loading-spinner");
+    clearInterval(spinnerImage.dataset.intervalId);
+
+    // Hide the loading container
+    $(".loading-container").hide();
 }

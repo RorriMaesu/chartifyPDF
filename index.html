@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Analyzer</title>
+    <title>ChartifyPDF</title>
     <script src="/static/jquery-3.7.0.min.js"></script>
     <script src="/static/script.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -14,10 +15,14 @@
 
 <div class="container">
     <img src="/static/logo.png" alt="Logo" class="logo">
-    <h2>PDF Analyzer</h2>
+    <h2>ChartifyPDF</h2>
 
     <input type="file" id="pdfInput" style="display: none;">
-
+    <div class="loading-container">
+        <img id="loading-spinner" src="" alt="" />
+        <p id="loading-text">Loading...</p>
+    </div>
+    
     <div class="button-container">
         <button id="uploadBtn"></button>
         <button id="exportBtn" onclick="exportData()"></button>
